@@ -30,14 +30,18 @@ export const jokeSlice = createSlice({
       category: '',
     },
     page: 0,
-    end:30,
+    end: 30,
     perPage: 30,
     hasMore: true,
   },
   reducers: {
     fetchJokes: (state, action: PayloadAction<ServerResponse>) => {
-      state.jokesList = action.payload.result;
-      state.jokeFilteredList = action.payload.result.slice(
+      state.jokesList = action.payload.result.map(x => ({
+        ...x,
+        likes:0,
+        dislikes:0
+      })).filter(x => !x.categories.includes('religion'));//blasphemy
+      state.jokeFilteredList =  state.jokesList .slice(
         state.page,
         state.end,
       );
@@ -51,18 +55,17 @@ export const jokeSlice = createSlice({
     filter: (state, action: PayloadAction<Filter>) => {
       state.filter = action.payload;
       state.page = 0;
-      state.end  = 30;
+      state.end = 30;
       const list = current(state.jokesList);
-      const filteredList = list
-        .filter((joke) => {
-          return action.payload.query !== ''
-            ? joke.value
-                .toLowerCase()
-                .includes(action.payload.query.toLowerCase())
-            : action.payload.category !== ''
-            ? joke.categories.includes(action.payload.category)
-            : true;
-        })
+      const filteredList = list.filter((joke) => {
+        return action.payload.query !== ''
+          ? joke.value
+              .toLowerCase()
+              .includes(action.payload.query.toLowerCase())
+          : action.payload.category !== ''
+          ? joke.categories.includes(action.payload.category)
+          : true;
+      });
       state.jokeFilteredList = filteredList.slice(state.page, state.end);
       state.total = filteredList.length;
       state.hasMore = state.jokeFilteredList.length < state.total;
@@ -74,7 +77,6 @@ export const jokeSlice = createSlice({
       state.jokeFilteredList = state.jokeFilteredList.concat(
         state.jokesList.slice(state.page, state.end),
       );
-   
     },
     loading: (state) => {
       state.loading = true;
@@ -99,13 +101,19 @@ export const jokeSlice = createSlice({
       });
     },
     prev_joke: (state, action: PayloadAction<string>) => {
-      const index = state.jokeFilteredList.findIndex((x) => x.id === action.payload);
+      const index = state.jokeFilteredList.findIndex(
+        (x) => x.id === action.payload,
+      );
       state.selectedJoke =
-        index < 0 ? state.jokeFilteredList[0] : state.jokeFilteredList[index - 1];
+        index < 0
+          ? state.jokeFilteredList[0]
+          : state.jokeFilteredList[index - 1];
       state.index = index - 1;
     },
     next_joke: (state, action: PayloadAction<string>) => {
-      const index = state.jokeFilteredList.findIndex((x) => x.id === action.payload);
+      const index = state.jokeFilteredList.findIndex(
+        (x) => x.id === action.payload,
+      );
       state.selectedJoke =
         index >= state.total
           ? state.jokeFilteredList[state.total]

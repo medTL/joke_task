@@ -8,7 +8,7 @@ export const  Jokes: FunctionComponent =() => {
   const filter = useAppSelector(filterBody);
   return (
     <div className="jokes">
-     {filter.category !== '' ? <li className='jokes_category'>{filter.category}</li> : <li className='jokes_category'>All Categories</li>}
+     {filter.category !== '' ? <li className='jokes_category'>{filter.category.toUpperCase()}</li> : <li className='jokes_category'>ALL CATEGORIES</li>}
       {jokes.map((joke, index) => {
         if (jokes.length === index + 1) {
           return <JokeCard  id='last-joke' key={joke.id} joke={joke} />;

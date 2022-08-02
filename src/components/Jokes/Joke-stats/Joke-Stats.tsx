@@ -85,16 +85,22 @@ export const  JokeStats: FunctionComponent = () => {
             <div className="joke-stats_content_joke_card_header">
               {filter.category !== '' ? (
                 <li className="joke-stats_content_joke_card_header_category">
-                  {filter.category}
+                  {filter.category.toUpperCase()}
                 </li>
               ) : (
                 <li className="joke-stats_content_joke_card_header_category">
-                  ALL CATEGORY
+                  ALL CATEGORIES
                 </li>
               )}
-              <li className="joke-stats_content_joke_card_header_rank">
+             {joke.likes <= 50 && <li className="joke-stats_content_joke_card_header_rank rank_popular">
+                POPULAR
+              </li>}
+              {joke.likes <= 100 && joke.likes > 50 && <li className="joke-stats_content_joke_card_header_rank rank_trending">
                 TRENDING
-              </li>
+              </li>}  
+              {joke.likes >= 101  && <li className="joke-stats_content_joke_card_header_rank rank_epic">
+                EPIC
+              </li>}
             </div>
 
             <div className="joke-stats_content_joke_card_body">

@@ -6,6 +6,7 @@ $action: #cfc995;
 $white-two: #ffffff;
 $white-three: #efefed;
 $red: #ff5b5b;
+$blue: #329df2;
 $weird-green: #57e690;
 $pastel-orange: #ff915b;
 $blue-sky: #57dbe6;
@@ -14,8 +15,10 @@ $pale-orange: #ff915b;
 $kiwi-green: #8fe360;
 $light-gold: #ffdf5b;
 $black-text: #5e5e5e;
-$like: #3dc782;
-$dislike: #dd003d;
+$like:#00a060 ;
+$dislike:#dd003d;
+$like-hover: #3dc782;
+$dislike-hover: #ff004b;
 
 html,
 body,
@@ -31,6 +34,9 @@ body,
   font-family: "Montserrat-regular", serif;
 }
 body::-webkit-scrollbar {
+  display: none !important;
+}
+#root::-webkit-scrollbar {
   display: none !important;
 }
 .clickibale {

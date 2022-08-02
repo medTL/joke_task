@@ -1,0 +1,40 @@
+@import './fonts.scss';
+
+$white: #f9f9ff;
+$black: #303030;
+$action: #cfc995;
+$white-two: #ffffff;
+$white-three: #efefed;
+$red: #ff5b5b;
+$weird-green: #57e690;
+$pastel-orange: #ff915b;
+$blue-sky: #57dbe6;
+$action-two: #d0ba93;
+$pale-orange: #ff915b;
+$kiwi-green: #8fe360;
+$light-gold: #ffdf5b;
+$black-text: #5e5e5e;
+$like: #3dc782;
+$dislike: #dd003d;
+
+html,
+body,
+#root {
+  margin: 0;
+  box-sizing: border-box;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  background-color: $white;
+  font-family: "Montserrat-regular", serif;
+}
+body::-webkit-scrollbar {
+  display: none !important;
+}
+.clickibale {
+  cursor: pointer;
+}
+
+

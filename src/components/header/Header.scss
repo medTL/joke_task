@@ -1,0 +1,60 @@
+@import '../../index.scss';
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  min-height: 22em;
+  background-image: url('/assets/images/bitmap.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1em;
+  .header_app-title {
+    color: $action;
+    font-size: 4.5em;
+    margin: 0;
+  }
+  .header_app-description {
+    color: $white-two;
+    font-size: 2.5em;
+    margin: 0;
+  }
+  .header_search-input {
+    width: 35%;
+    height: 1.5em;
+    margin: 1em ;
+    border: 2px solid $white-two;
+    border-radius: 5px;
+    background-color: transparent;
+    background-image: url();
+    padding: 1em 1.5em 1em 1.5em;
+    color: $white;
+    font-size: 1em;
+    background-image: url('/assets/logos/search-copy.png');
+    background-repeat: no-repeat;
+    background-size: 2em;
+    background-position: 98%;
+
+
+
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+
+   .header .header_app-title{
+    font-size: 2.5em;
+   }
+   .header .header_app-description{
+    font-size: 1.5em;
+   }
+   .header .header_search-input {
+    width: 80%;
+    margin: 0 1em;
+   }
+}

@@ -1,0 +1,15 @@
+@import '../../index.scss';
+
+.container {
+  width: 90%;
+  padding-top: 22em;
+  margin: auto;
+  height: 100%;
+}
+
+@media only screen and (max-width: 1024px)
+{
+  .container {
+    width: 100%;
+  }
+}

@@ -34,7 +34,6 @@ export const  JokeStats: FunctionComponent = () => {
     },1000)
   }
   const filter = useAppSelector(filterBody);
-  console.log(filter.category);
 
   const handleLike = () => {
     joke = {

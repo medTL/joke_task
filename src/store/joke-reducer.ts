@@ -30,6 +30,7 @@ export const jokeSlice = createSlice({
       category: '',
     },
     page: 0,
+    end:30,
     perPage: 30,
     hasMore: true,
   },
@@ -38,7 +39,7 @@ export const jokeSlice = createSlice({
       state.jokesList = action.payload.result;
       state.jokeFilteredList = action.payload.result.slice(
         state.page,
-        state.perPage,
+        state.end,
       );
       state.total = action.payload.total;
       state.loading = false;
@@ -50,8 +51,9 @@ export const jokeSlice = createSlice({
     filter: (state, action: PayloadAction<Filter>) => {
       state.filter = action.payload;
       state.page = 0;
+      state.end  = 30;
       const list = current(state.jokesList);
-      state.jokeFilteredList = list
+      const filteredList = list
         .filter((joke) => {
           return action.payload.query !== ''
             ? joke.value
@@ -61,16 +63,18 @@ export const jokeSlice = createSlice({
             ? joke.categories.includes(action.payload.category)
             : true;
         })
-        .slice(state.page, state.perPage);
-      state.total = state.jokeFilteredList.length;
+      state.jokeFilteredList = filteredList.slice(state.page, state.end);
+      state.total = filteredList.length;
       state.hasMore = state.jokeFilteredList.length < state.total;
     },
     loadMore: (state) => {
-      state.page = state.page++;
+      state.page = state.page + state.perPage;
+      state.end = state.end + state.perPage;
       state.hasMore = state.jokeFilteredList.length < state.total;
       state.jokeFilteredList = state.jokeFilteredList.concat(
-        state.jokeFilteredList.slice(state.page, state.perPage),
+        state.jokesList.slice(state.page, state.end),
       );
+   
     },
     loading: (state) => {
       state.loading = true;
